@@ -12,8 +12,8 @@ help="
 	Arguments:
     
 	    data	---   The data to evaluate the Hill moment from.
-	    k_n	---   The number of tail observations. (Not the percentage)
-	    j	---   The j:th moment will be returned (j = 1 is equal to the Hill estimator)
+	    k_n		---   The number of tail observations. (Not the percentage)
+	    j		---   The j:th moment will be returned (j = 1 is equal to the Hill estimator)
 "
 
 hill_moment <- function(data, k_n, j){
@@ -26,8 +26,8 @@ help="
 
 	Arguments:
     
-	    data	---   The data to evaluate the Hill moment from.
-	    k_n	---   The number of tail observations. (Not the percentage)
+	    data      ---   The data to evaluate the Hill moment from.
+	    k_n	      ---   The number of tail observations. (Not the percentage)
 "
 
 moment_estimator <- function(data, k_n){
