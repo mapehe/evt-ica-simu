@@ -4,4 +4,4 @@
 #SBATCH --array=0-215
 
 module load R
-srun args/round_$SLURM_ARRAY_TASK_ID 
+srun ./args/round_$SLURM_ARRAY_TASK_ID 
