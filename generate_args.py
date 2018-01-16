@@ -12,7 +12,7 @@ GLOBAL_STEP = 0
 for i in itertools.product(DISTRIBUTION_TYPE,
 			    EV_ESTIMATOR, SAMPLE_SIZE,
 			    FRACTION, ICA_METHOD):
-    with open("./args/args_%s" %GLOBAL_STEP) as f:
+    with open("./args/round_%s" %GLOBAL_STEP, "w") as f:
 	tmp = i+i
-	f.write("Rscript simu_round.r --distribution_type %s --gamma_estimator %s --n %s --p %s --ica_method %s --ofile out_%s_%s_%s_%s_%s" %tmp)
+	f.write("Rscript simu_round.r --distribution_type %s --gamma_estimator %s --n %s --p %s --ica_method %s --ofile ./out/out_%s_%s_%s_%s_%s" %tmp)
     GLOBAL_STEP += 1
