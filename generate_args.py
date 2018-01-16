@@ -1,7 +1,7 @@
 import itertools
 import re
 
-DISTRIBUTION_TYPE = ("HHH", "HHL", "HHH")
+DISTRIBUTION_TYPE = ("HHH", "HHL", "LLL")
 EV_ESTIMATOR = ("hill", "moment")
 SAMPLE_SIZE = (1000, 5000, 10000, 20000)
 FRACTION = (0.1, 0.05, 0.01)
