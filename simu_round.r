@@ -5,7 +5,6 @@ library(JADE)
 library(fICA)
 
 # Auxiliary functions
-# TODO: fICA doesn't work??
 
 help="
 
@@ -87,14 +86,14 @@ if(OPT$distribution_type == "HHH"){
 		      matrix(rt(n, 13), nrow=n)))}
 } else if(OPT$distribution_type == "HHL"){
     observation_generator <- function(n){
-	return( cbind(matrix(rt(n, 9),  nrow=n),
-		      matrix(rt(n, 13), nrow=n),
-		      matrix(runif(n),	nrow=n)))}
+	return( cbind(matrix(rt(n, 9),	    nrow=n),
+		      matrix(rt(n, 13),	    nrow=n),
+		      matrix(runif(n)-0.5,  nrow=n)))}
 } else if(OPT$distribution_type == "LLL"){
     observation_generator <- function(n){
-	return( cbind(matrix(runif(n),  nrow=n),
-		      matrix(rbeta(n, 0.5, 0.5), nrow=n),
-		      matrix(rexp(n),	nrow=n)))}
+	return( cbind(matrix(runif(n)-0.5,	      nrow=n),
+		      matrix(rbeta(n, 0.5, 0.5)-0.5,  nrow=n),
+		      matrix(sign(runif(n))*rexp(n),  nrow=n)))}
 } else{ 
     observation_generator = NA
 }
@@ -108,7 +107,7 @@ if(OPT$ica_method == "FOBI"){
     }
 } else if(OPT$ica_method == "fICA"){
     ICA_method <- function(x){
-	return(fICA(x)$S)
+	return(fICA(x, maxiter=10000)$S)
     } 
 } else if(OPT$ica_method == "none"){
     ICA_method = NULL
@@ -151,13 +150,12 @@ for( i in 1:NUM_EPOCH ){
     Z	=     t(apply(observation_generator(OPT$n), 1, function(x) A %*% x))
 
     if(OPT$ica_method != "none"){
-	X_hat	=     ICA_method(Z)
+	X_hat	=   ICA_method(Z)
     } else{
-	X_hat = observation_generator(OPT$n)
+	X_hat	=   observation_generator(OPT$n)
     }
 
-    g_hat	=     apply(X_hat, 2, function(x) max(EV_estimator(x[which(x > 0)]),
-						      EV_estimator(abs(x[which(x <= 0)]))))
+    g_hat	=     apply(X_hat, 2, function(x) EV_estimator(x[which(x > 0)]))
     out = rbind(out, g_hat)
 }
 
