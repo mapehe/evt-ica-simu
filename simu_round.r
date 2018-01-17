@@ -107,7 +107,7 @@ if(OPT$ica_method == "FOBI"){
     }
 } else if(OPT$ica_method == "fICA"){
     ICA_method <- function(x){
-	return(fICA(x, maxiter=10000)$S)
+	return(fICA(x, maxiter=1000)$S)
     } 
 } else if(OPT$ica_method == "none"){
     ICA_method = NULL
@@ -150,12 +150,17 @@ for( i in 1:NUM_EPOCH ){
     Z	=     t(apply(observation_generator(OPT$n), 1, function(x) A %*% x))
 
     if(OPT$ica_method != "none"){
-	X_hat	=   ICA_method(Z)
+	X_hat	=   tryCatch(ICA_method(Z), error = function(e){ return(NA) })
     } else{
 	X_hat	=   observation_generator(OPT$n)
     }
 
-    g_hat	=     apply(X_hat, 2, function(x) EV_estimator(x[which(x > 0)]))
+    if(  is.na(X_hat) ){
+	g_hat = c(NA, NA, NA)
+    } else {
+	g_hat	=     apply(X_hat, 2, function(x) EV_estimator(x[which(x > 0)]))
+    }
+
     out = rbind(out, g_hat)
 }
 
