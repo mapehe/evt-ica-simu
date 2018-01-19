@@ -5,7 +5,8 @@ More generally, it illustrates one way to use a SLURM cluster (such as Aalto Uni
 The simulation required generating samples independently and
 evaluating certain statistical quantities from them; the different
 scenarios were executed in parallel. A setup that solves any 
-"embarrassingly parallel" problem can be built in a similar way.
+"embarrassingly parallel" problem can be built in a similar way and this repo can be useful
+starting point.
 
 The approach here is simple: Commands of the form
 ```
