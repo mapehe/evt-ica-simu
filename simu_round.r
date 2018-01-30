@@ -93,7 +93,7 @@ if(OPT$distribution_type == "HHH"){
     observation_generator <- function(n){
 	return( cbind(matrix(runif(n)-0.5,	      nrow=n),
 		      matrix(rbeta(n, 0.5, 0.5)-0.5,  nrow=n),
-		      matrix(sign(runif(n))*rexp(n),  nrow=n)))}
+		      matrix(sign(rnorm(n))*rexp(n),  nrow=n)))}
 } else{ 
     observation_generator = NA
 }
