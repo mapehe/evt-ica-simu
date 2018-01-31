@@ -143,6 +143,7 @@ if(TRUE %in% c(is.na(observation_generator), is.na(ICA_method), is.na(EV_estimat
 }
 
 out = vector()
+set.seed(123)
 
 for( i in 1:NUM_EPOCH ){
 
