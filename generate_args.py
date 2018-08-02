@@ -1,9 +1,10 @@
 import itertools
 import re
+import numpy as np
 
 DISTRIBUTION_TYPE = ("HHH", "HHL", "LLL")
 EV_ESTIMATOR = ("hill", "moment")
-SAMPLE_SIZE = (1000, 5000, 10000, 20000)
+SAMPLE_SIZE = 1000*np.array(range(1,21))
 FRACTION = (0.1, 0.05, 0.01)
 ICA_METHOD = ("none", "fICA", "FOBI")
 
